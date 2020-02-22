@@ -171,3 +171,198 @@ public:
   </code></pre>
   
 </details>
+
+
+<details>
+<summary>阶乘尾部0的个数</summary>
+  其实就是不断除以5,统计5的个数
+  <pre><code>
+   class Solution {
+public:
+    int trailingZeroes(int n) {
+        std::ios::sync_with_stdio(false);
+        int len5 = 0;
+        while(n>0){
+            len5+=n/5;
+            n/=5;
+        }
+
+        return len5;
+    }
+};
+  </code></pre>
+</details>
+
+
+<details>
+<summary>汉诺塔</summary>
+  A->B移动   B->C移动   //从A中删除  从C中添加
+  <pre><code>
+   class Solution {
+public:
+    void hanota(vector<int>& A, vector<int>& B, vector<int>& C) {
+        move(A.size(),A,B,C);
+    }
+
+    //A->B    B-C  C增加就push,数据来源方就要删除
+    void move(int len,vector<int>& a,vector<int>& b,vector<int>& c){
+        if(len == 1){
+            c.push_back(a.back());
+            a.pop_back();
+            return;
+        }
+
+        move(len-1,a,c,b);
+        c.push_back(a.back());
+        a.pop_back();
+        move(len-1,b,a,c);
+    }
+};
+  </code></pre>
+</details>
+
+
+<details>
+<summary>合并有序数组(每个数组去前几个元素)</summary>
+  一切尽在注释,就是速度有点慢
+  <pre><code>
+   class Solution {
+public:
+    void merge(vector<int>& A, int m, vector<int>& B, int n) {
+        //先删除
+        A.erase(A.begin()+m,A.end());
+        //再插入
+        A.insert(A.begin()+m,B.begin(),B.begin()+n);
+        //最后排序
+        sort(A.begin(),A.end());
+    }
+};
+  </code></pre>
+  
+  三指针法则,两个指针分别指向两个数组的最后一个元素,还有一个指针指向总长度m+n处
+  <pre>
+  <code>
+  class Solution {
+public:
+    void merge(vector<int>& A, int m, vector<int>& B, int n) {
+        std::ios::sync_with_stdio(false);
+        int totalLen = m+n-1;
+        int indexA = m-1;
+        int indexB = n-1;
+
+        while(indexA >=0 && indexB >= 0){
+            if(A[indexA] > B[indexB]){
+                A[totalLen--] = A[indexA--];
+            }else{
+                A[totalLen--] = B[indexB--];
+            }
+        }
+
+        while(indexA >=0){
+            A[totalLen--] = A[indexA--];
+        }
+        while(indexB >= 0){
+            A[totalLen--] = B[indexB--];
+        }
+    }
+};
+  </code>
+  </pre>
+  
+</details>
+
+
+<details>
+<summary>连续数组最大值</summary>
+  简单的dp
+  <pre><code>
+   class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        if(nums.size()==0)return 0;
+        if(nums.size()==1)return nums[0];
+        //初始化
+        int maxVal = nums[0];
+        for(int i = 1; i < nums.size();i++){
+            //前一个是正数自然是增加
+            if(nums[i-1] > 0){
+                nums[i]+=nums[i-1];
+            }
+            //保留最大值
+            if(nums[i]>maxVal){
+                maxVal = nums[i];
+            }
+        }
+
+        return maxVal;
+    }
+};
+  </code></pre>
+</details>
+
+
+
+<details>
+<summary>模板</summary>
+  内容
+  <pre><code>
+   
+  </code></pre>
+</details>
+
+
+
+<details>
+<summary>模板</summary>
+  内容
+  <pre><code>
+   
+  </code></pre>
+</details>
+
+
+<details>
+<summary>模板</summary>
+  内容
+  <pre><code>
+   
+  </code></pre>
+</details>
+
+
+<details>
+<summary>模板</summary>
+  内容
+  <pre><code>
+   
+  </code></pre>
+</details>
+
+
+
+<details>
+<summary>模板</summary>
+  内容
+  <pre><code>
+   
+  </code></pre>
+</details>
+
+
+<details>
+<summary>模板</summary>
+  内容
+  <pre><code>
+   
+  </code></pre>
+</details>
+
+
+
+<details>
+<summary>模板</summary>
+  内容
+  <pre><code>
+   
+  </code></pre>
+</details>
